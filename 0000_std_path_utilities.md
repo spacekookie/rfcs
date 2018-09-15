@@ -5,7 +5,7 @@
 
 # Summary
 
-As part of feedback gathered by the CLI-WG we have concluded that there are several key aspects of path management missing from the Rust stdlib structures. Most of this pre-RFC are based on the summary made by this [comment].
+As part of feedback gathered by the CLI-WG we have concluded that there are several key aspects of path management missing from the Rust stdlib structures. Most of this pre-RFC is based on the summary made by this [comment].
 
 [comment]: https://github.com/rust-lang-nursery/cli-wg/issues/10#issuecomment-407809608
 
