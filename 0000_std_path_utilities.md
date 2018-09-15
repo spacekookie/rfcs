@@ -11,17 +11,17 @@ As part of feedback gathered by the CLI-WG we have concluded that there are seve
 
 # Motivation
 
-We believe that the addition of these functions will have a positive impact on the Rust ecosystem as a whole, enabling users to write CLI applications more quickly, without having re-invent the wheel and while allowing these functions to fit neatly into already existing structures and functions.
+We believe that the addition of these functions will have a positive impact on the Rust ecosystem as a whole, enabling users to write CLI applications more quickly, without having to re-invent the wheel and while also allowing these functions to fit neatly into already existing structures and modules.
 
 # Guide-level explanation
 
-Additions to the `stdlib` are made to the `fs` module, the `PathBuf` and `Path` constructs.
+Additions to the `stdlib` are made to the `fs` module, the `path::PathBuf` and `path::Path` constructs.
 
-Firstly, a `fs::normalize` function is added that operates simmilarly to `fs::canonicalize`, except that it doesn't actually touch the filesystem. Documentation would refer to it as a non-mutable variang of `fs::canonicalize` to make it clear that the functions are otherwise the same.
+Firstly, a `fs::normalize` function is added that operates simmilarly to `fs::canonicalize`, except that it doesn't actually touch the filesystem. Documentation would refer to it as a non-mutable variant of `fs::canonicalize` to make it clear that the functions are otherwise the same.
 
 **Non-destructive `PathBuf::push`**
 
-The `PathBuf` will gain a new, non-destructive `append` function which will operate similarly to the already existing `push`, except never over-writing the buffer, even if the provided path segment is absolute.
+The `PathBuf` will gain a new, non-destructive `append` function which will operate similarly to the already existing `push`, except never overwriting the buffer, even if the provided path segment is absolute.
 
 ```rust
 let mut path = PathBuf::from("/usr"); // --> /usr
@@ -40,7 +40,7 @@ Path::new("/usr").join("/lib");   // --> /lib
 
 **`Path::relative_to` and `Path::absolute`**
 
-`Path` would also gain two more functions for computing relative paths to a provided one, as well as the absolute base path for any given relative one. These functions would require the current working directory (CWD) to be available. Although in cases where `Path::starts_with` is true, `relative_to` would not require it.
+`Path` would also gain two more functions for computing relative paths to a base one, as well as the absolute base path for any given relative one. These functions would require the current working directory (CWD) to be available. Although in cases where `Path::starts_with` is true, `relative_to` would not require it.
 
 # Reference-level explanation
 
@@ -52,7 +52,7 @@ For `Path::relative_to` and `Path::absolute` the most leg-work is required. Beca
 
 # Drawbacks
 
-Especially the functions `Path::relative_to` and `Path::absolute` require additional utilities to be available in the `fs` module and could add unwanted complexity into it. In case this is a problem, these two functions could be excluded, with a crate potentially implementing them.
+Especially the functions `Path::relative_to` and `Path::absolute` require additional utilities to be available in the `fs` module and could add unwanted complexity to it. In case this is a problem, these two functions can be excluded, with a crate potentially implementing them, without having any impact on the other additions made.
 
 For the other functions no drawbacks exist that we are aware of at this time.
 
