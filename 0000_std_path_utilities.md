@@ -17,7 +17,7 @@ We believe that the addition of these functions will have a positive impact on t
 
 Additions to the `stdlib` are made to the `fs` module, the `path::PathBuf` and `path::Path` constructs.
 
-Firstly, a `fs::normalize` function is added that operates simmilarly to `fs::canonicalize`, except that it doesn't actually touch the filesystem. Documentation would refer to it as a non-mutable variant of `fs::canonicalize` to make it clear that the functions are otherwise the same.
+Firstly, a `fs::normalize` function is added that operates simmilarly to `fs::canonicalize`, except that it doesn't actually touch the filesystem. This means that it wouldn't fail to normalize a path if a directory does not exist on the filesystem.
 
 **Non-destructive `PathBuf::push`**
 
@@ -44,7 +44,7 @@ Path::new("/usr").join("/lib");   // --> /lib
 
 # Reference-level explanation
 
-The `fs::normalize` works exactly the same as `fs::canonicalize` which means that the existing implementation can be moved, while `fs::canonicalize` becomes a filesystem mutating wrapper around `fs::normalize`.
+While `fs::normalize` provides the same functional output as `fs::canonicalize`, it's implementation is quite different, as it can not rely on either `realpath` (for unix) or `CreateFile` (Windows) to do it's job. This means that file path canonicalization needs to be done on it's own, or using some other backend implementation.
 
 The additional `PathBuf` and `Path` functions work similarly in their design that a lot of the code can be shared from `PathBuf::push` and `Path::join` respectively, while those functions can become wrappers around `PathBuf::append` and `Path::concat` with different input sanitisation/ handling.
 
