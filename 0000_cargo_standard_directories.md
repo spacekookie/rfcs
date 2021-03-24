@@ -53,7 +53,7 @@ By default these paths are as follows.
 
 - `XDG_CONFIG_HOME = $HOME/.config/cargo`
 - `XDG_CACHE_HOME = $HOME/.cache/cargo`
-- `XDG_BIN_HOME = $HOME/.bin/cargo`
+- `XDG_BIN_HOME = $HOME/.local/bin/cargo`
 
 ## Windows specifics
 
