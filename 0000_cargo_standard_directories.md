@@ -57,7 +57,7 @@ By default these paths are as follows.
 
 ## Windows specifics
 
-On Windows Cargo will use `$%LOCALAPPDATA%\Cargo\Cache`, which is a standard directory
+On Windows Cargo will use `%LOCALAPPDATA%\Cargo\Cache`, which is a standard directory
 where applications keep their cache files, and 
 
 Explain the proposal as if it was already included in the language and you were teaching it 
